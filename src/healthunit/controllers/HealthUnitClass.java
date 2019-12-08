@@ -25,16 +25,16 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void createCustomer(String name, String ageRange) {
-		customers.add(CustomerClass(name, ageRange));
+		customers.add(new CustomerClass(name, ageRange));
 	}
 
 	public void createEmployee(String name, String category) {
-		employees.add(EmployeeClass(name, category));
+		employees.add(new EmployeeClass(name, category));
 
 	}
 
 	public void createFamily(String familyName) {
-		families.add(FamilyClass(familyName));
+		families.add(new FamilyClass(familyName));
 
 	}
 
@@ -52,21 +52,23 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public Customer getCustomer(String customerName){
+		Customer myCustomer = null;
 		for(Customer i : this.getCustomerList()){
 			if(i.getName() == customerName){
-				return i;
-				break;
+				myCustomer = i;
 			}
 		}
+		return myCustomer;
 	}
 
 	public Family getFamily(String familyName){
+		Family myFamily = null;
 		for(Family i : this.getFamilyList()){
 			if(i.getName() == familyName){
-				return i;
-				break;
+				myFamily = i;
 			}
 		}
+		return myFamily;
 	}
 
 	public void associateCustomertoFamily(String customerName, String familyName) {
@@ -80,7 +82,7 @@ public class HealthUnitClass implements HealthUnit{
 		Family familyToChange = getFamily(familyName);
 		Customer memberToDel = getCustomer(customerName);
 		familyToChange.delMember(memberToDel);
-		customerToDel.setFamilyName('');
+		memberToDel.setFamilyName(null);
 	}
 
 	public void listCustomers() {
@@ -97,7 +99,7 @@ public class HealthUnitClass implements HealthUnit{
 
 	public void listFamilies() {
 		for(Family i : this.getFamilyList()){
-			System.out.println(i.getCategory() + ' ' + i.getName());
+			System.out.println(i.getName());
 		}
 	}
 

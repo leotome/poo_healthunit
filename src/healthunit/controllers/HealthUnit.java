@@ -26,7 +26,3 @@ public interface HealthUnit {
 	boolean save();
 	boolean load();	
 }
-
-/* 
- * Esses são os métodos que precisamos implementar.
- */

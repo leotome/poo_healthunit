@@ -8,23 +8,25 @@ public class FamilyClass implements Family {
   private List<Customer> members;
 
   public FamilyClass(String familyName){
-    List<Customers> members = new ArrayList<>();
+    this.members = new ArrayList<Customer>();
     this.familyName = familyName;
   }
 
   public String getName(){
-    return this.name;
+    return this.familyName;
   }
 
   public void addMember(Customer member){
-    members.add(member);
+    this.members.add(member);
   }
 
   public void delMember(Customer member){
+	int index = 0;
     for(Customer i : this.members){
       if(i.getName() == member.getName()){
-        return null;
+        this.members.remove(index);
       }
+      index++;
     }
   }
 

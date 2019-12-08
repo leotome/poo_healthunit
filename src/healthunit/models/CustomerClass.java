@@ -10,7 +10,7 @@ public class CustomerClass implements Customer {
       this.ageRange = ageRange;
     }
 
-    public setFamilyName(String familyName){
+    public void setFamilyName(String familyName){
       this.familyName = familyName;
     }
 
