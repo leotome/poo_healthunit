@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import healthunit.models.Appointment;
 import healthunit.models.Customer;
+import healthunit.models.CustomerClass;
 import healthunit.models.Employee;
+import healthunit.models.EmployeeClass;
 import healthunit.models.Family;
 
 public class HealthUnitClass implements HealthUnit{
@@ -22,41 +24,59 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void createCustomer(String name, String ageRange) {
-		// TODO Auto-generated method stub
+		customers.add(CustomerClass(name, ageRange));
 	}
 
 	public void createEmployee(String name, String category) {
-		// TODO Auto-generated method stub
+		employees.add(EmployeeClass(name, category));
 
 	}
 
 	public void createFamily(String familyName) {
-		// TODO Auto-generated method stub
+		families.add(FamilyClass(familyName));
 
+	}
+
+	public Customer getCustomer(String customerName){
+		for(Customer i : this.customers){
+			if(i.getName() == customerName){
+				return i;
+			}
+		}
+	}
+
+	public Family getFamily(String familyName){
+		for(Family i : this.families){
+			if(i.getName() == familyName){
+				return i;
+				break;
+			}
+		}
 	}
 
 	public void associateCustomertoFamily(String customerName, String familyName) {
-		// TODO Auto-generated method stub
-
+		Family familyToAdd = getFamily(familyName);
+		Customer memberToAdd = getCustomer(customerName);
+		familyToAdd.addCustomer(memberToAdd);
 	}
 
 	public void deassociateCustomertoFamily(String customerName, String familyName) {
-		// TODO Auto-generated method stub
-
+		Family familyToChange = getFamily(familyName);
+		Customer customerToDel = getCustomer(customerName);
+		familyToChange.delMember(customerToDel);
 	}
 
 	public void listCustomers() {
-		// TODO Auto-generated method stub
-
+		return this.customers;
 	}
 
 	public void listEmployees() {
-		// TODO Auto-generated method stub
+		return this.employees;
 
 	}
 
 	public void listFamilies() {
-		// TODO Auto-generated method stub
+		return this.families;
 
 	}
 
