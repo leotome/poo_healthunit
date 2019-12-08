@@ -28,9 +28,10 @@ public class FamilyClass implements Family {
     }
   }
 
-  public String listMembers(){
-    return null;
+  public void listMembers(){
+    for(Customer i : this.members){
+      System.out.println(i.getAgeRange() + ' ' + i.getName());
+    }
   }
-
 
 }

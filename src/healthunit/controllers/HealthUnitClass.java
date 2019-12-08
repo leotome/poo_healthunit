@@ -9,6 +9,7 @@ import healthunit.models.CustomerClass;
 import healthunit.models.Employee;
 import healthunit.models.EmployeeClass;
 import healthunit.models.Family;
+import healthunit.models.FamilyClass;
 
 public class HealthUnitClass implements HealthUnit{
 	private List<Appointment> appointments;
@@ -37,16 +38,30 @@ public class HealthUnitClass implements HealthUnit{
 
 	}
 
+	public List<Appointment> getAppointmentList(){
+		return this.appointments;
+	}
+  public List<Customer> getCustomerList(){
+		return this.customers;
+	}
+	public List<Employee> getEmployeeList(){
+		return this.employees;
+	}
+  public List<Family> getFamilyList(){
+		return this.families;
+	}
+
 	public Customer getCustomer(String customerName){
-		for(Customer i : this.customers){
+		for(Customer i : this.getCustomerList()){
 			if(i.getName() == customerName){
 				return i;
+				break;
 			}
 		}
 	}
 
 	public Family getFamily(String familyName){
-		for(Family i : this.families){
+		for(Family i : this.getFamilyList()){
 			if(i.getName() == familyName){
 				return i;
 				break;
@@ -57,32 +72,38 @@ public class HealthUnitClass implements HealthUnit{
 	public void associateCustomertoFamily(String customerName, String familyName) {
 		Family familyToAdd = getFamily(familyName);
 		Customer memberToAdd = getCustomer(customerName);
-		familyToAdd.addCustomer(memberToAdd);
+		familyToAdd.addMember(memberToAdd);
+		memberToAdd.setFamilyName(familyToAdd.getName());
 	}
 
 	public void deassociateCustomertoFamily(String customerName, String familyName) {
 		Family familyToChange = getFamily(familyName);
-		Customer customerToDel = getCustomer(customerName);
-		familyToChange.delMember(customerToDel);
+		Customer memberToDel = getCustomer(customerName);
+		familyToChange.delMember(memberToDel);
+		customerToDel.setFamilyName('');
 	}
 
 	public void listCustomers() {
-		return this.customers;
+		for(Customer i : this.getCustomerList()){
+			System.out.println(i.getFamilyName() + ' ' + i.getAgeRange() + ' ' + i.getName());
+		}
 	}
 
 	public void listEmployees() {
-		return this.employees;
-
+		for(Employee i : this.getEmployeeList()){
+			System.out.println(i.getCategory() + ' ' + i.getName());
+		}
 	}
 
 	public void listFamilies() {
-		return this.families;
-
+		for(Family i : this.getFamilyList()){
+			System.out.println(i.getCategory() + ' ' + i.getName());
+		}
 	}
 
 	public void showFamily(String familyName) {
-		// TODO Auto-generated method stub
-
+		Family familyToList = getFamily(familyName);
+		familyToList.listMembers();
 	}
 
 	public void createAppointment(String customerName) {
