@@ -14,7 +14,7 @@ public interface HealthUnit {
 	
 	void showFamily(String familyName);
 	
-	void createAppointment(String customerName);
+	void createAppointment(String customerName, String service, String employeeName);
 	void cancelAppointment(String customerName);
 	
 	void showAppointmentstoCustomer(String customerName);

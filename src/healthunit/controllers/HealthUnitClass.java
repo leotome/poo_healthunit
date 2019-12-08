@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import healthunit.models.Appointment;
+import healthunit.models.AppointmentClass;
 import healthunit.models.Customer;
 import healthunit.models.CustomerClass;
 import healthunit.models.Employee;
@@ -41,13 +42,14 @@ public class HealthUnitClass implements HealthUnit{
 	public List<Appointment> getAppointmentList(){
 		return this.appointments;
 	}
-  public List<Customer> getCustomerList(){
+	
+	public List<Customer> getCustomerList(){
 		return this.customers;
 	}
 	public List<Employee> getEmployeeList(){
 		return this.employees;
 	}
-  public List<Family> getFamilyList(){
+	public List<Family> getFamilyList(){
 		return this.families;
 	}
 
@@ -69,6 +71,17 @@ public class HealthUnitClass implements HealthUnit{
 			}
 		}
 		return myFamily;
+	}
+	
+	public Employee getEmployee(String employeeName) {
+		Employee myEmployee = null;
+		for(Employee i : this.getEmployeeList()) {
+			if(i.getName() == employeeName){
+				myEmployee = i;
+				break;
+			}
+		}
+		return myEmployee;
 	}
 
 	public void associateCustomertoFamily(String customerName, String familyName) {
@@ -108,14 +121,19 @@ public class HealthUnitClass implements HealthUnit{
 		familyToList.listMembers();
 	}
 
-	public void createAppointment(String customerName) {
-		// TODO Auto-generated method stub
+	public void createAppointment(String customerName, String service, String employeeName) {
+		this.appointments.add(new AppointmentClass(this.getCustomer(customerName), service, this.getEmployee(employeeName)));
 
 	}
 
 	public void cancelAppointment(String customerName) {
-		// TODO Auto-generated method stub
-
+		int custIndex = 0;
+		for(Appointment i : this.getAppointmentList()) {
+			if(i.getCustomer().getName() == customerName){
+				this.appointments.remove(custIndex);	
+			}
+			custIndex++;
+		}
 	}
 
 	public void showAppointmentstoCustomer(String customerName) {

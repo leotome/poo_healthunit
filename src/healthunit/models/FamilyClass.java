@@ -25,6 +25,7 @@ public class FamilyClass implements Family {
     for(Customer i : this.members){
       if(i.getName() == member.getName()){
         this.members.remove(index);
+        break;
       }
       index++;
     }
