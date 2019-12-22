@@ -54,26 +54,52 @@ public class HealthUnitClass implements HealthUnit{
 	
 	public Category getCategory(String categoryName) {
 		for(Category i : this.categories) {
+<<<<<<< HEAD
 			if(i.getName().equalsIgnoreCase(categoryName)) {
 				return i;
+=======
+			if(i.getName() == categoryName) {
+				category = i;
+				break;
+>>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 			}
 		}
 		return null;
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 	public AgeRange getAgeRange(String ageRangeName) {
 		for(AgeRange i : this.ageRanges) {
+<<<<<<< HEAD
 			if(i.getName().equalsIgnoreCase(ageRangeName)) {
 				return i;
+=======
+			if(i.getName() == ageRangeName) {
+				ageRange = i;
+				break;
+>>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 			}
 		}
 		return null;
 	}
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 	public Service getService(String serviceName) {
 		for(Service i : this.services) {
+<<<<<<< HEAD
 			if(i.getName().equalsIgnoreCase(serviceName)) {
 				return i;
+=======
+			if(i.getName() == serviceName) {
+				service = i;
+				break;
+>>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 			}
 		}
 		return null;
@@ -82,15 +108,17 @@ public class HealthUnitClass implements HealthUnit{
 	public void createCustomer(String name, String ageRangeName) {
 		Customer customer = this.getCustomer(name);
 		AgeRange ageRange = this.getAgeRange(ageRangeName);
-		if (customer == null) {
-			if (ageRange != null) {
-				customers.add(new CustomerClass(name, ageRange));
-			} else {
-				System.out.println("Faixa etária inexistente.");
-			}
-		} else {
-			System.out.println("Utente existente.");
-		}
+		System.out.println(customer.getName() + " " + ageRange.getName());
+//		if (customer == null) {
+//			if (ageRange != null) {
+//				customers.add(new CustomerClass(name, ageRange));
+//			} else {
+//				System.out.println("Faixa etária inexistente.");
+//			}
+//		} else {
+//			System.out.println("Utente existente.");
+//		}
+
 	}
 
 	public void createEmployee(String categoryName, String name) {

@@ -27,6 +27,7 @@ public class CustomerClass implements Customer, Cloneable {
       return this.ageRange;
     }
     
+<<<<<<< HEAD
     public Customer clone() {
     	Customer cust = null;
 		try {
@@ -37,4 +38,6 @@ public class CustomerClass implements Customer, Cloneable {
     	return cust;
     }
     
+=======
+>>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 }
