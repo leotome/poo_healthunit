@@ -1,6 +1,6 @@
 package healthunit.models;
 
-public interface Customer {
+public interface Customer extends Cloneable {
 	String getName();
 	void setFamilyName(String familyName);
 	String getFamilyName();

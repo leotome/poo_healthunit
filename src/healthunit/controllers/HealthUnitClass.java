@@ -29,6 +29,18 @@ public class HealthUnitClass implements HealthUnit{
 	private List<Service> services;
 	private List<AgeRange> ageRanges;
 
+	public void initializeAll() {
+		this.categories.add(new CategoryClass("Medicina"));
+		this.categories.add(new CategoryClass("Enfermagem"));
+		this.categories.add(new CategoryClass("Auxiliar"));
+		this.ageRanges.add(new AgeRangeClass("Jovem"));
+		this.ageRanges.add(new AgeRangeClass("Adulto"));
+		this.ageRanges.add(new AgeRangeClass("Idoso"));
+		this.services.add(new ServiceClass("Consulta"));
+		this.services.add(new ServiceClass("PequenaCirurgia"));
+		this.services.add(new ServiceClass("Enfermagem"));
+	}
+	
 	public HealthUnitClass(){
 		appointments = new ArrayList<Appointment>();
 		customers = new ArrayList<Customer>();
@@ -37,12 +49,7 @@ public class HealthUnitClass implements HealthUnit{
 		categories = new ArrayList<Category>();
 		services = new ArrayList<Service>();
 		ageRanges = new ArrayList<AgeRange>();
-	}
-	
-	public void initializeCategories() {
-		categories.add(new CategoryClass("Medicina"));
-		categories.add(new CategoryClass("Enfermagem"));
-		categories.add(new CategoryClass("Auxiliar"));
+		this.initializeAll();
 	}
 	
 	public Category getCategory(String categoryName) {
@@ -50,38 +57,31 @@ public class HealthUnitClass implements HealthUnit{
 		for(Category i : this.categories) {
 			if(i.getName() == categoryName) {
 				category = i;
+				break;
 			}
 		}
 		return category;
 	}
 
-	public void initializeAgeRange() {
-		ageRanges.add(new AgeRangeClass("Jovem"));
-		ageRanges.add(new AgeRangeClass("Adulto"));
-		ageRanges.add(new AgeRangeClass("Idoso"));
-	}
 	
 	public AgeRange getAgeRange(String ageRangeName) {
 		AgeRange ageRange = null;
 		for(AgeRange i : this.ageRanges) {
 			if(i.getName() == ageRangeName) {
 				ageRange = i;
+				break;
 			}
 		}
 		return ageRange;
 	}
 	
-	public void initializeServices(){
-		services.add(new ServiceClass("Consulta"));
-		services.add(new ServiceClass("PequenaCirurgia"));
-		services.add(new ServiceClass("Enfermagem"));
-	}
-
+	
 	public Service getService(String serviceName) {
 		Service service = null;
 		for(Service i : this.services) {
 			if(i.getName() == serviceName) {
 				service = i;
+				break;
 			}
 		}
 		return service;
@@ -90,18 +90,20 @@ public class HealthUnitClass implements HealthUnit{
 	public void createCustomer(String name, String ageRangeName) {
 		Customer customer = this.getCustomer(name);
 		AgeRange ageRange = this.getAgeRange(ageRangeName);
-		if (customer == null) {
-			if (ageRange != null) {
-				customers.add(new CustomerClass(name, ageRange));
-			} else {
-				System.out.println("Faixa etária inexistente.");
-			}
-		} else {
-			System.out.println("Utente existente.");
-		}
+		System.out.println(customer.getName() + " " + ageRange.getName());
+//		if (customer == null) {
+//			if (ageRange != null) {
+//				customers.add(new CustomerClass(name, ageRange));
+//			} else {
+//				System.out.println("Faixa etária inexistente.");
+//			}
+//		} else {
+//			System.out.println("Utente existente.");
+//		}
+
 	}
 
-	public void createEmployee(String name, String categoryName) {
+	public void createEmployee(String categoryName, String name) {
 		Category category = this.getCategory(categoryName);
 		Employee employee = this.getEmployee(name);
 		if (category != null) {

@@ -26,4 +26,5 @@ public class CustomerClass implements Customer {
     public AgeRange getAgeRange(){
       return this.ageRange;
     }
+    
 }
