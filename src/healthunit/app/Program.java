@@ -10,6 +10,7 @@ public class Program {
 		HealthUnit healthunit = new HealthUnitClass();
 		healthunit.initializeCategories();
 		healthunit.initializeAgeRange();
+		healthunit.initializeServices();
 		Scanner input = new Scanner(System.in);
 		while(input.hasNextLine()) {
 			String line = input.nextLine();

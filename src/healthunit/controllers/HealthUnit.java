@@ -3,6 +3,7 @@ package healthunit.controllers;
 public interface HealthUnit {
 	void initializeCategories();
 	void initializeAgeRange();
+	void initializeServices();
 	
 	void createCustomer(String name, String ageRange);
 	void createEmployee(String name, String category);

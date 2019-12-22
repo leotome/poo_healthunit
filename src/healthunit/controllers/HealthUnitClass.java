@@ -7,6 +7,8 @@ import healthunit.models.Appointment;
 import healthunit.models.AppointmentClass;
 import healthunit.models.Category;
 import healthunit.models.CategoryClass;
+import healthunit.models.Service;
+import healthunit.models.ServiceClass;
 import healthunit.models.AgeRange;
 import healthunit.models.AgeRangeClass;
 import healthunit.models.Customer;
@@ -22,6 +24,7 @@ public class HealthUnitClass implements HealthUnit{
 	private List<Employee> employees;
 	private List<Family> families;
 	private List<Category> categories;
+	private List<Service> services;
 	private List<AgeRange> ageRanges;
 
 	public HealthUnitClass(){
@@ -30,6 +33,7 @@ public class HealthUnitClass implements HealthUnit{
 		employees = new ArrayList<Employee>();
 		families = new ArrayList<Family>();
 		categories = new ArrayList<Category>();
+		services = new ArrayList<Service>();
 		ageRanges = new ArrayList<AgeRange>();
 	}
 	
@@ -63,6 +67,22 @@ public class HealthUnitClass implements HealthUnit{
 			}
 		}
 		return ageRange;
+	}
+	
+	public void initializeServices(){
+		services.add(new ServiceClass("Consulta"));
+		services.add(new ServiceClass("PequenaCirurgia"));
+		services.add(new ServiceClass("Enfermagem"));
+	}
+
+	public Service getService(String serviceName) {
+		Service service = null;
+		for(Service i : this.services) {
+			if(i.getName() == serviceName) {
+				service = i;
+			}
+		}
+		return service;
 	}
 	
 	public void createCustomer(String name, String ageRangeName) {
@@ -217,7 +237,11 @@ public class HealthUnitClass implements HealthUnit{
 
 	public void showFamily(String familyName) {
 		Family familyToList = getFamily(familyName);
-		familyToList.listMembers();
+		if(familyToList != null) {
+			familyToList.listMembers();	
+		} else {
+			System.out.println("Família inexistente.");
+		}
 	}
 
 	public void createAppointment(String customerName, String service, String employeeName) {
@@ -227,11 +251,21 @@ public class HealthUnitClass implements HealthUnit{
 
 	public void cancelAppointment(String customerName) {
 		int custIndex = 0;
-		for(Appointment i : this.getAppointmentList()) {
-			if(i.getCustomer().getName() == customerName){
-				this.appointments.remove(custIndex);
+		int foundCust = 0;
+		Customer customer = getCustomer(customerName);
+		if(customer != null) {
+			for(Appointment i : this.getAppointmentList()) {
+				if(i.getCustomer().getName() == customerName){
+					this.appointments.remove(custIndex);
+					foundCust++;
+				}
+				custIndex++;
 			}
-			custIndex++;
+			if(foundCust == 0) {
+				System.out.println("Utente sem cuidados de saúde marcados.");
+			}
+		} else {
+			System.out.println("Utente inexistente.");
 		}
 	}
 
@@ -266,7 +300,7 @@ public class HealthUnitClass implements HealthUnit{
 				}
 			}
 			if (appointCounter == 0) {
-				System.out.println("Utente sem cuidados de saúde marcados.");
+				System.out.println("Família sem cuidados de saúde marcados.");
 			}
 		} else { 
 			System.out.println("Família inexistente.");
@@ -274,8 +308,16 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void showAppointmentstoEmployee(String category, String employeeName) {
-		// TODO Auto-generated method stub
-
+		Employee employee = this.getEmployee(employeeName);
+		int serviceCounter = 0;
+		if(employee != null) {
+			//TODO
+			if(serviceCounter == 0) {
+				System.out.println("Profissional de saúde sem marcações.");
+			}
+		} else {
+			System.out.println("Profissional de saúde inexistente.");
+		}
 	}
 
 	public void showAppointmentsperService(String serviceName) {
