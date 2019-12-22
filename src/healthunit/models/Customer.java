@@ -1,8 +1,8 @@
 package healthunit.models;
 
 public interface Customer {
-	public String getName();
-	public void setFamilyName(String familyName);
-	public String getFamilyName();
-	public String getAgeRange();
+	String getName();
+	void setFamilyName(String familyName);
+	String getFamilyName();
+	AgeRange getAgeRange();
 }

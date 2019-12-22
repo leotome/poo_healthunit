@@ -2,10 +2,10 @@ package healthunit.models;
 
 public class CustomerClass implements Customer {
     private String name;
-    private String ageRange;
+    private AgeRange ageRange;
     private String familyName;
 
-    public CustomerClass(String name, String ageRange){
+    public CustomerClass(String name, AgeRange ageRange){
       this.name = name;
       this.ageRange = ageRange;
     }
@@ -22,7 +22,7 @@ public class CustomerClass implements Customer {
       return this.name;
     }
 
-    public String getAgeRange(){
+    public AgeRange getAgeRange(){
       return this.ageRange;
     }
 }

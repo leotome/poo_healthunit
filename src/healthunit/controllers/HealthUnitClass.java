@@ -67,8 +67,13 @@ public class HealthUnitClass implements HealthUnit{
 	
 	public void createCustomer(String name, String ageRange) {
 		Customer customer = this.getCustomer(name);
+		AgeRange ageRange = this.getAgeRange(ageRange)
 		if (customer == null) {
-			customers.add(new CustomerClass(name, ageRange));	
+			if (ageRange != null) {
+				customers.add(new CustomerClass(name, ageRange));
+			} else {
+				System.out.println("Faixa etária inexistente");
+			}
 		} else {
 			System.out.println("Utente existente");
 		}
