@@ -3,9 +3,6 @@ package healthunit.controllers;
 import java.util.List;
 
 import healthunit.models.Appointment;
-import healthunit.models.Category;
-import healthunit.models.Service;
-import healthunit.models.AgeRange;
 import healthunit.models.Customer;
 import healthunit.models.Employee;
 import healthunit.models.Family;
@@ -14,14 +11,6 @@ public interface HealthUnit {
 	void initializeCategories();
 	void initializeAgeRange();
 	void initializeServices();
-
-	Category getCategory(String categoryName);
-	AgeRange getAgeRange(String ageRangeName);
-	Service getService(String serviceName);
-
-	Customer getCustomer(String customerName);
-	Family getFamily(String familyName);
-	Employee getEmployee(String employeeName);
 
 	List<Appointment> getAppointmentList();
 	List<Customer> getCustomerList();
