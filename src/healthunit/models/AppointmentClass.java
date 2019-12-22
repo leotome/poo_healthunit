@@ -3,11 +3,13 @@ package healthunit.models;
 public class AppointmentClass implements Appointment {
 	private Customer customer;
 	private Employee employee;
-	private String service;
+	private Category category;
+	private Service service;
 	
-	public AppointmentClass(Customer customer, String service, Employee employee) {
+	public AppointmentClass(Customer customer, Service service, Category category, Employee employee) {
 		this.customer = customer;
 		this.service = service;
+		this.category = category;
 		this.employee = employee;
 	}
 	
@@ -16,6 +18,6 @@ public class AppointmentClass implements Appointment {
 	}
 	
 	public String getInfo() {
-		return service + ' ' + this.employee.getCategory() + ' ' + this.employee.getName();
+		return this.service.getName() + ' ' + this.category.getName() + ' ' + this.employee.getName();
 	}	
 }

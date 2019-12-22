@@ -18,6 +18,8 @@ import healthunit.models.EmployeeClass;
 import healthunit.models.Family;
 import healthunit.models.FamilyClass;
 
+import java.util.Scanner;
+
 public class HealthUnitClass implements HealthUnit{
 	private List<Appointment> appointments;
 	private List<Customer> customers;
@@ -244,9 +246,46 @@ public class HealthUnitClass implements HealthUnit{
 		}
 	}
 
-	public void createAppointment(String customerName, String service, String employeeName) {
-		this.appointments.add(new AppointmentClass(this.getCustomer(customerName), service, this.getEmployee(employeeName)));
-
+	public void createAppointment(String customerName) {
+		Scanner input = new Scanner(System.in);
+		Customer customer = this.getCustomer(customerName);
+		if(customer != null) {
+			Service service = this.getService(input.nextLine());
+			input.close();
+			if(service != null) {
+				while(input.hasNextLine()) {
+					String line = input.nextLine();
+					if(line.isBlank()) {
+						input.close();
+						break;
+					}
+					String[] myCommand = line.split(" ");
+					Category category = this.getCategory(myCommand[1]);
+					Employee employee = this.getEmployee(myCommand[2]);
+					if(category != null) {
+						if(employee != null) {
+							switch (service.getName()) {
+							case "Consulta":
+								this.appointments.add(new AppointmentClass(customer, service, category, employee));
+							case "PequenaCirurgia":
+								this.appointments.add(new AppointmentClass(customer, service, category, employee));
+							case "Enfermagem":
+								this.appointments.add(new AppointmentClass(customer, service, category, employee));
+							}
+						} else {
+							System.out.println("Profissional de saúde inexistente.");
+						}
+					} else {
+						System.out.println("Categoria inexistente.");
+					}
+				}
+			} else {
+				System.out.println("Serviço inexistente.");
+			}
+		} else {
+			System.out.println("Utente inexistente.");
+		}
+		
 	}
 
 	public void cancelAppointment(String customerName) {
