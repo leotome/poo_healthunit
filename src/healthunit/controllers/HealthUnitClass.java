@@ -309,10 +309,10 @@ public class HealthUnitClass implements HealthUnit{
 
 	public void showAppointmentstoEmployee(String category, String employeeName) {
 		Employee employee = this.getEmployee(employeeName);
-		int serviceCounter = 0;
+		int employeeCounter = 0;
 		if(employee != null) {
 			//TODO
-			if(serviceCounter == 0) {
+			if(employeeCounter == 0) {
 				System.out.println("Profissional de saúde sem marcações.");
 			}
 		} else {
@@ -321,8 +321,16 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void showAppointmentsperService(String serviceName) {
-		// TODO Auto-generated method stub
-
+		Service service = this.getService(serviceName);
+		int serviceCounter = 0;
+		if(service != null) {
+			//TODO
+			if (serviceCounter == 0) {
+				System.out.println("Serviço sem marcações.");
+			}
+		} else {
+			System.out.println("Serviço inexistente.");
+		}
 	}
 
 	public boolean save() {
