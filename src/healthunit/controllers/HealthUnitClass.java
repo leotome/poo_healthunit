@@ -182,20 +182,36 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void listEmployees() {
-		for(Employee i : this.getEmployeeList()){
-			System.out.println(i.getCategory().getName() + ' ' + i.getName());
+		if(!this.getEmployeeList().isEmpty()) {
+			for(Employee i : this.getEmployeeList()){
+				System.out.println(i.getCategory().getName() + ' ' + i.getName());
+			}
+		} else {
+			System.out.println("Sem profissionais registados.");
+		}
+	}
+	
+	public void listFamilies() {
+		if(!this.getFamilyList().isEmpty()) {
+			for(Family i : this.getFamilyList()){
+				System.out.println(i.getName());
+			}
+		} else {
+			System.out.println("Sem famílias registadas.");
 		}
 	}
 	
 	public void listCustomers() {
-		for(Customer i : this.getCustomerList()){
-			System.out.println(i.getFamilyName() + ' ' + i.getAgeRange() + ' ' + i.getName());
-		}
-	}
-
-	public void listFamilies() {
-		for(Family i : this.getFamilyList()){
-			System.out.println(i.getName());
+		if(!this.getCustomerList().isEmpty()) {
+			for(Customer i : this.getCustomerList()){
+				if(i.getFamilyName() == null) {
+					System.out.println(i.getAgeRange().getName() + ' ' + i.getName());	
+				} else {
+					System.out.println(i.getFamilyName() + ' ' + i.getAgeRange().getName() + ' ' + i.getName());
+				}
+			}
+		} else {
+			System.out.println("Sem utentes registados.");
 		}
 	}
 
