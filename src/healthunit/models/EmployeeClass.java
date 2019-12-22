@@ -2,9 +2,9 @@ package healthunit.models;
 
 public class EmployeeClass implements Employee {
   private String name;
-  private String category;
+  private Category category;
 
-  public EmployeeClass(String name, String category){
+  public EmployeeClass(String name, Category category){
     this.name = name;
     this.category = category;
   }
@@ -13,7 +13,7 @@ public class EmployeeClass implements Employee {
     return this.name;
   }
 
-  public String getCategory(){
+  public Category getCategory(){
     return this.category;
   }
 

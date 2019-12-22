@@ -1,6 +1,9 @@
 package healthunit.controllers;
 
 public interface HealthUnit {
+	void initializeCategories();
+	void initializeAgeRange();
+	
 	void createCustomer(String name, String ageRange);
 	void createEmployee(String name, String category);
 	void createFamily(String familyName);

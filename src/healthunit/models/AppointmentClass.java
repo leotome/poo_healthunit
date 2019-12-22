@@ -15,7 +15,7 @@ public class AppointmentClass implements Appointment {
 		return this.customer;
 	}
 	
-	public void getInfo() {
-		System.out.println(service + ' ' + this.employee.getCategory() + ' ' + this.employee.getName());
+	public String getInfo() {
+		return service + ' ' + this.employee.getCategory() + ' ' + this.employee.getName();
 	}	
 }

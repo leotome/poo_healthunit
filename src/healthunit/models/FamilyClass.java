@@ -30,6 +30,10 @@ public class FamilyClass implements Family {
       index++;
     }
   }
+  
+  public List<Customer> getMembers(){
+	  return this.members;
+  }
 
   public void listMembers(){
     for(Customer i : this.members){

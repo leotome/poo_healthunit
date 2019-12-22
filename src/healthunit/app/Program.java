@@ -8,6 +8,8 @@ import healthunit.controllers.HealthUnitClass;
 public class Program {
 	public static void main(String[] args) {
 		HealthUnit healthunit = new HealthUnitClass();
+		healthunit.initializeCategories();
+		healthunit.initializeAgeRange();
 		Scanner input = new Scanner(System.in);
 		while(input.hasNextLine()) {
 			String line = input.nextLine();
@@ -18,22 +20,21 @@ public class Program {
 			String[] commands = line.split(" ");
 			switch(commands[0]) {
 			case "RP":
-				//Registar profissional
+				healthunit.createEmployee(commands[1], commands[2]);
 				break;
 			case "RU":
-				//Registar utente
+				healthunit.createCustomer(commands[1], commands[2]);
 				break;
 			case "RF":
-				//Registar família
+				healthunit.createFamily(commands[1]);
 				break;
 			case "AF":
-				//Associar utente a família
 				break;
 			case "DF":
 				//Desassociar utente de família
 				break;
 			case "LP":
-				//Listar profissionais
+				healthunit.listEmployees();
 				break;
 			case "LU":
 				//Listar utentes
