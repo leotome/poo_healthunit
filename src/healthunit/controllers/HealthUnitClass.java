@@ -65,9 +65,9 @@ public class HealthUnitClass implements HealthUnit{
 		return ageRange;
 	}
 	
-	public void createCustomer(String name, String ageRange) {
+	public void createCustomer(String name, String ageRangeName) {
 		Customer customer = this.getCustomer(name);
-		AgeRange ageRange = this.getAgeRange(ageRange)
+		AgeRange ageRange = this.getAgeRange(ageRangeName);
 		if (customer == null) {
 			if (ageRange != null) {
 				customers.add(new CustomerClass(name, ageRange));
@@ -94,7 +94,12 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void createFamily(String familyName) {
-		families.add(new FamilyClass(familyName));
+		Family family = this.getFamily(familyName);
+		if(family == null) {
+			families.add(new FamilyClass(familyName));	
+		} else {
+			System.out.println("Família existente");
+		}
 	}
 
 	public List<Appointment> getAppointmentList(){

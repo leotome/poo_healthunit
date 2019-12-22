@@ -37,7 +37,7 @@ public class FamilyClass implements Family {
 
   public void listMembers(){
     for(Customer i : this.members){
-      System.out.println(i.getAgeRange() + ' ' + i.getName());
+      System.out.println(i.getAgeRange().getName() + ' ' + i.getName());
     }
   }
 
