@@ -8,6 +8,7 @@ public class CustomerClass implements Customer {
     public CustomerClass(String name, AgeRange ageRange){
       this.name = name;
       this.ageRange = ageRange;
+      this.familyName = null;
     }
 
     public void setFamilyName(String familyName){

@@ -72,10 +72,10 @@ public class HealthUnitClass implements HealthUnit{
 			if (ageRange != null) {
 				customers.add(new CustomerClass(name, ageRange));
 			} else {
-				System.out.println("Faixa etária inexistente");
+				System.out.println("Faixa etária inexistente.");
 			}
 		} else {
-			System.out.println("Utente existente");
+			System.out.println("Utente existente.");
 		}
 	}
 
@@ -86,10 +86,10 @@ public class HealthUnitClass implements HealthUnit{
 			if (employee == null) {
 				employees.add(new EmployeeClass(name, category));	
 			} else {
-				System.out.println("Profissional existente");
+				System.out.println("Profissional existente.");
 			}
 		} else {
-			System.out.println("Categoria inexistente");
+			System.out.println("Categoria inexistente.");
 		}
 	}
 
@@ -98,7 +98,7 @@ public class HealthUnitClass implements HealthUnit{
 		if(family == null) {
 			families.add(new FamilyClass(familyName));	
 		} else {
-			System.out.println("Família existente");
+			System.out.println("Família existente.");
 		}
 	}
 
@@ -150,26 +150,46 @@ public class HealthUnitClass implements HealthUnit{
 	public void associateCustomertoFamily(String customerName, String familyName) {
 		Family familyToAdd = getFamily(familyName);
 		Customer memberToAdd = getCustomer(customerName);
-		familyToAdd.addMember(memberToAdd);
-		memberToAdd.setFamilyName(familyToAdd.getName());
+		if (memberToAdd != null) {
+			if(memberToAdd.getFamilyName() == null) {
+				if(familyToAdd != null) {
+					familyToAdd.addMember(memberToAdd);
+					memberToAdd.setFamilyName(familyToAdd.getName());			
+				} else {
+					System.out.println("Família inexistente.");
+				}
+			} else {
+				System.out.println("Utente pertencente a família.");
+			}
+		} else {
+			System.out.println("Utente inexistente.");
+		}
 	}
 
 	public void deassociateCustomertoFamily(String customerName, String familyName) {
 		Family familyToChange = getFamily(familyName);
 		Customer memberToDel = getCustomer(customerName);
-		familyToChange.delMember(memberToDel);
-		memberToDel.setFamilyName(null);
-	}
-
-	public void listCustomers() {
-		for(Customer i : this.getCustomerList()){
-			System.out.println(i.getFamilyName() + ' ' + i.getAgeRange() + ' ' + i.getName());
+		if(memberToDel != null) {
+			if(memberToDel.getFamilyName() == familyName) {
+				familyToChange.delMember(memberToDel);
+				memberToDel.setFamilyName(null);
+			} else {
+				System.out.println("Utente não pertence a família.");
+			}
+		} else {
+			System.out.println("Utente inexistente.");
 		}
 	}
 
 	public void listEmployees() {
 		for(Employee i : this.getEmployeeList()){
 			System.out.println(i.getCategory().getName() + ' ' + i.getName());
+		}
+	}
+	
+	public void listCustomers() {
+		for(Customer i : this.getCustomerList()){
+			System.out.println(i.getFamilyName() + ' ' + i.getAgeRange() + ' ' + i.getName());
 		}
 	}
 
@@ -210,10 +230,10 @@ public class HealthUnitClass implements HealthUnit{
 				}
 			}
 			if (appointCounter == 0) {
-				System.out.println("Utente sem cuidados de saúde marcados");
+				System.out.println("Utente sem cuidados de saúde marcados.");
 			}
 		} else {
-			System.out.println("Utente inexistente");
+			System.out.println("Utente inexistente.");
 		}
 	}
 
@@ -230,10 +250,10 @@ public class HealthUnitClass implements HealthUnit{
 				}
 			}
 			if (appointCounter == 0) {
-				System.out.println("Utente sem cuidados de saúde marcados");
+				System.out.println("Utente sem cuidados de saúde marcados.");
 			}
 		} else { 
-			System.out.println("Família inexistente");
+			System.out.println("Família inexistente.");
 		}
 	}
 
