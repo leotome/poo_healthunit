@@ -26,18 +26,5 @@ public class CustomerClass implements Customer, Cloneable {
     public AgeRange getAgeRange(){
       return this.ageRange;
     }
-    
-<<<<<<< HEAD
-    public Customer clone() {
-    	Customer cust = null;
-		try {
-			cust = (Customer) super.clone();
-		} catch (CloneNotSupportedException e) {
-			return null;
-		}
-    	return cust;
-    }
-    
-=======
->>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
+
 }

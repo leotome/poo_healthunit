@@ -40,7 +40,7 @@ public class HealthUnitClass implements HealthUnit{
 		this.services.add(new ServiceClass("PequenaCirurgia"));
 		this.services.add(new ServiceClass("Enfermagem"));
 	}
-	
+
 	public HealthUnitClass(){
 		appointments = new ArrayList<Appointment>();
 		customers = new ArrayList<Customer>();
@@ -51,60 +51,35 @@ public class HealthUnitClass implements HealthUnit{
 		ageRanges = new ArrayList<AgeRange>();
 		this.initializeAll();
 	}
-	
+
 	public Category getCategory(String categoryName) {
 		for(Category i : this.categories) {
-<<<<<<< HEAD
 			if(i.getName().equalsIgnoreCase(categoryName)) {
 				return i;
-=======
-			if(i.getName() == categoryName) {
-				category = i;
-				break;
->>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 			}
 		}
 		return null;
 	}
 
-<<<<<<< HEAD
-=======
-	
->>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
+
 	public AgeRange getAgeRange(String ageRangeName) {
 		for(AgeRange i : this.ageRanges) {
-<<<<<<< HEAD
 			if(i.getName().equalsIgnoreCase(ageRangeName)) {
 				return i;
-=======
-			if(i.getName() == ageRangeName) {
-				ageRange = i;
-				break;
->>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 			}
 		}
 		return null;
 	}
-	
-<<<<<<< HEAD
-=======
-	
->>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
+
 	public Service getService(String serviceName) {
 		for(Service i : this.services) {
-<<<<<<< HEAD
 			if(i.getName().equalsIgnoreCase(serviceName)) {
 				return i;
-=======
-			if(i.getName() == serviceName) {
-				service = i;
-				break;
->>>>>>> 763e592dacc7cf19761957ef5efa8867ac969ad4
 			}
 		}
 		return null;
 	}
-	
+
 	public void createCustomer(String name, String ageRangeName) {
 		Customer customer = this.getCustomer(name);
 		AgeRange ageRange = this.getAgeRange(ageRangeName);
@@ -126,7 +101,7 @@ public class HealthUnitClass implements HealthUnit{
 		Employee employee = this.getEmployee(name);
 		if (category != null) {
 			if (employee == null) {
-				employees.add(new EmployeeClass(name, category));	
+				employees.add(new EmployeeClass(name, category));
 			} else {
 				System.out.println("Profissional existente.");
 			}
@@ -138,7 +113,7 @@ public class HealthUnitClass implements HealthUnit{
 	public void createFamily(String familyName) {
 		Family family = this.getFamily(familyName);
 		if(family == null) {
-			families.add(new FamilyClass(familyName));	
+			families.add(new FamilyClass(familyName));
 		} else {
 			System.out.println("Família existente.");
 		}
@@ -192,7 +167,7 @@ public class HealthUnitClass implements HealthUnit{
 			if(memberToAdd.getFamilyName() == null) {
 				if(familyToAdd != null) {
 					familyToAdd.addMember(memberToAdd);
-					memberToAdd.setFamilyName(familyToAdd.getName());			
+					memberToAdd.setFamilyName(familyToAdd.getName());
 				} else {
 					System.out.println("Família inexistente.");
 				}
@@ -228,7 +203,7 @@ public class HealthUnitClass implements HealthUnit{
 			System.out.println("Sem profissionais registados.");
 		}
 	}
-	
+
 	public void listFamilies() {
 		if(!this.getFamilyList().isEmpty()) {
 			for(Family i : this.getFamilyList()){
@@ -238,12 +213,12 @@ public class HealthUnitClass implements HealthUnit{
 			System.out.println("Sem famílias registadas.");
 		}
 	}
-	
+
 	public void listCustomers() {
 		if(!this.getCustomerList().isEmpty()) {
 			for(Customer i : this.getCustomerList()){
 				if(i.getFamilyName() == null) {
-					System.out.println(i.getAgeRange().getName() + ' ' + i.getName());	
+					System.out.println(i.getAgeRange().getName() + ' ' + i.getName());
 				} else {
 					System.out.println(i.getFamilyName() + ' ' + i.getAgeRange().getName() + ' ' + i.getName());
 				}
@@ -256,7 +231,7 @@ public class HealthUnitClass implements HealthUnit{
 	public void showFamily(String familyName) {
 		Family familyToList = getFamily(familyName);
 		if(familyToList != null) {
-			familyToList.listMembers();	
+			familyToList.listMembers();
 		} else {
 			System.out.println("Família inexistente.");
 		}
@@ -301,7 +276,7 @@ public class HealthUnitClass implements HealthUnit{
 		} else {
 			System.out.println("Utente inexistente.");
 		}
-		
+
 	}
 
 	public void cancelAppointment(String customerName) {
@@ -357,7 +332,7 @@ public class HealthUnitClass implements HealthUnit{
 			if (appointCounter == 0) {
 				System.out.println("Família sem cuidados de saúde marcados.");
 			}
-		} else { 
+		} else {
 			System.out.println("Família inexistente.");
 		}
 	}
