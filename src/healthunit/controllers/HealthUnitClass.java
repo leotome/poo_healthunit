@@ -29,6 +29,18 @@ public class HealthUnitClass implements HealthUnit{
 	private List<Service> services;
 	private List<AgeRange> ageRanges;
 
+	public void initializeAll() {
+		this.categories.add(new CategoryClass("Medicina"));
+		this.categories.add(new CategoryClass("Enfermagem"));
+		this.categories.add(new CategoryClass("Auxiliar"));
+		this.ageRanges.add(new AgeRangeClass("Jovem"));
+		this.ageRanges.add(new AgeRangeClass("Adulto"));
+		this.ageRanges.add(new AgeRangeClass("Idoso"));
+		this.services.add(new ServiceClass("Consulta"));
+		this.services.add(new ServiceClass("PequenaCirurgia"));
+		this.services.add(new ServiceClass("Enfermagem"));
+	}
+	
 	public HealthUnitClass(){
 		appointments = new ArrayList<Appointment>();
 		customers = new ArrayList<Customer>();
@@ -37,54 +49,34 @@ public class HealthUnitClass implements HealthUnit{
 		categories = new ArrayList<Category>();
 		services = new ArrayList<Service>();
 		ageRanges = new ArrayList<AgeRange>();
-	}
-	
-	public void initializeCategories() {
-		categories.add(new CategoryClass("Medicina"));
-		categories.add(new CategoryClass("Enfermagem"));
-		categories.add(new CategoryClass("Auxiliar"));
+		this.initializeAll();
 	}
 	
 	public Category getCategory(String categoryName) {
-		Category category = null;
 		for(Category i : this.categories) {
-			if(i.getName() == categoryName) {
-				category = i;
+			if(i.getName().equalsIgnoreCase(categoryName)) {
+				return i;
 			}
 		}
-		return category;
+		return null;
 	}
 
-	public void initializeAgeRange() {
-		ageRanges.add(new AgeRangeClass("Jovem"));
-		ageRanges.add(new AgeRangeClass("Adulto"));
-		ageRanges.add(new AgeRangeClass("Idoso"));
-	}
-	
 	public AgeRange getAgeRange(String ageRangeName) {
-		AgeRange ageRange = null;
 		for(AgeRange i : this.ageRanges) {
-			if(i.getName() == ageRangeName) {
-				ageRange = i;
+			if(i.getName().equalsIgnoreCase(ageRangeName)) {
+				return i;
 			}
 		}
-		return ageRange;
+		return null;
 	}
 	
-	public void initializeServices(){
-		services.add(new ServiceClass("Consulta"));
-		services.add(new ServiceClass("PequenaCirurgia"));
-		services.add(new ServiceClass("Enfermagem"));
-	}
-
 	public Service getService(String serviceName) {
-		Service service = null;
 		for(Service i : this.services) {
-			if(i.getName() == serviceName) {
-				service = i;
+			if(i.getName().equalsIgnoreCase(serviceName)) {
+				return i;
 			}
 		}
-		return service;
+		return null;
 	}
 	
 	public void createCustomer(String name, String ageRangeName) {
@@ -101,7 +93,7 @@ public class HealthUnitClass implements HealthUnit{
 		}
 	}
 
-	public void createEmployee(String name, String categoryName) {
+	public void createEmployee(String categoryName, String name) {
 		Category category = this.getCategory(categoryName);
 		Employee employee = this.getEmployee(name);
 		if (category != null) {
@@ -139,34 +131,30 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public Customer getCustomer(String customerName){
-		Customer myCustomer = null;
 		for(Customer i : this.getCustomerList()){
-			if(i.getName() == customerName){
-				myCustomer = i;
+			if(i.getName().equalsIgnoreCase(customerName)){
+				return i;
 			}
 		}
-		return myCustomer;
+		return null;
 	}
 
 	public Family getFamily(String familyName){
-		Family myFamily = null;
 		for(Family i : this.getFamilyList()){
-			if(i.getName() == familyName){
-				myFamily = i;
+			if(i.getName().equalsIgnoreCase(familyName)){
+				return i;
 			}
 		}
-		return myFamily;
+		return null;
 	}
 
 	public Employee getEmployee(String employeeName) {
-		Employee myEmployee = null;
 		for(Employee i : this.getEmployeeList()) {
-			if(i.getName() == employeeName){
-				myEmployee = i;
-				break;
+			if(i.getName().equalsIgnoreCase(employeeName)){
+				return i;
 			}
 		}
-		return myEmployee;
+		return null;
 	}
 
 	public void associateCustomertoFamily(String customerName, String familyName) {

@@ -8,9 +8,6 @@ import healthunit.controllers.HealthUnitClass;
 public class Program {
 	public static void main(String[] args) {
 		HealthUnit healthunit = new HealthUnitClass();
-		healthunit.initializeCategories();
-		healthunit.initializeAgeRange();
-		healthunit.initializeServices();
 		Scanner input = new Scanner(System.in);
 		while(input.hasNextLine()) {
 			String line = input.nextLine();
@@ -21,7 +18,7 @@ public class Program {
 			String[] commands = line.split(" ");
 			switch(commands[0]) {
 			case "RP":
-				healthunit.createEmployee(commands[1], commands[2]);
+				healthunit.createEmployee(commands[1].toUpperCase(), commands[2].toUpperCase());
 				break;
 			case "RU":
 				healthunit.createCustomer(commands[1], commands[2]);

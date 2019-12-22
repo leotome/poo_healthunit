@@ -1,6 +1,6 @@
 package healthunit.models;
 
-public class CustomerClass implements Customer {
+public class CustomerClass implements Customer, Cloneable {
     private String name;
     private AgeRange ageRange;
     private String familyName;
@@ -26,4 +26,15 @@ public class CustomerClass implements Customer {
     public AgeRange getAgeRange(){
       return this.ageRange;
     }
+    
+    public Customer clone() {
+    	Customer cust = null;
+		try {
+			cust = (Customer) super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
+    	return cust;
+    }
+    
 }

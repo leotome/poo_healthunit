@@ -8,9 +8,7 @@ import healthunit.models.Employee;
 import healthunit.models.Family;
 
 public interface HealthUnit {
-	void initializeCategories();
-	void initializeAgeRange();
-	void initializeServices();
+	void initializeAll();
 
 	List<Appointment> getAppointmentList();
 	List<Customer> getCustomerList();
