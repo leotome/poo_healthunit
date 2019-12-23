@@ -182,17 +182,17 @@ public class HealthUnitClass implements HealthUnit{
 		}
 	}
 
-	public void deassociateCustomertoFamily(String customerName, String familyName) {
-		Family familyToChange = getFamily(familyName);
+	public void deassociateCustomertoFamily(String customerName) {
 		Customer memberToDel = getCustomer(customerName);
 		if(memberToDel != null) {
-			if(memberToDel.getFamilyName() == familyName) {
+			if(!memberToDel.getFamilyName().isEmpty()) {
+				Family familyToChange = getFamily(memberToDel.getFamilyName());
 				familyToChange.delMember(memberToDel);
-				memberToDel.setFamilyName(null);
+				memberToDel.setFamilyName("");
 				System.out.println("Utente desassociado de família.");
 			} else {
 				System.out.println("Utente não pertence a família.");
-			}
+			} 
 		} else {
 			System.out.println("Utente inexistente.");
 		}

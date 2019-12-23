@@ -30,7 +30,7 @@ public class Program {
 				healthunit.associateCustomertoFamily(commands[1], commands[2]);
 				break;
 			case "DF":
-				healthunit.deassociateCustomertoFamily(commands[1], commands[2]);
+				healthunit.deassociateCustomertoFamily(commands[1]);
 				//Desassociar utente de família
 				break;
 			case "LP":

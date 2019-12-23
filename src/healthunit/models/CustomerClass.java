@@ -8,7 +8,7 @@ public class CustomerClass implements Customer, Cloneable {
     public CustomerClass(String name, AgeRange ageRange){
       this.name = name;
       this.ageRange = ageRange;
-      this.familyName = null;
+      this.familyName = "";
     }
 
     public void setFamilyName(String familyName){

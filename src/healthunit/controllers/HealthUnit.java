@@ -21,7 +21,7 @@ public interface HealthUnit {
 
 	void associateCustomertoFamily(String customerName, String familyName);
 
-	void deassociateCustomertoFamily(String customerName, String familyName);
+	void deassociateCustomertoFamily(String customerName);
 
 	void listEmployees();
 	void listFamilies();
