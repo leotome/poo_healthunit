@@ -18,7 +18,7 @@ public class Program {
 			String[] commands = line.split(" ");
 			switch(commands[0]) {
 			case "RP":
-				healthunit.createEmployee(commands[1].toUpperCase(), commands[2].toUpperCase());
+				healthunit.createEmployee(commands[1], commands[2]);
 				break;
 			case "RU":
 				healthunit.createCustomer(commands[1], commands[2]);
@@ -76,7 +76,7 @@ public class Program {
 				} else {
 					System.out.println("Ocorreu um erro na gravação.");
 				}
-				//Gravar 
+				//Gravar
 				break;
 			case "L":
 				boolean stateRead = healthunit.load();
@@ -93,5 +93,5 @@ public class Program {
 		}
 		input.close();
 	}
-		
+
 }
