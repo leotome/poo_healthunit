@@ -227,9 +227,11 @@ public class HealthUnitClass implements HealthUnit{
 		if(!this.getCustomerList().isEmpty()) {
 			for(Customer i : this.getCustomerList()){
 				if(i.getFamilyName() == "") {
-					System.out.println(i.getAgeRange().getName() + ' ' + i.getName());
+					System.out.println(i.getAgeRange().getName() + ' '
+							+ i.getName());
 				} else {
-					System.out.println(i.getFamilyName() + ' ' + i.getAgeRange().getName() + ' ' + i.getName());
+					System.out.println(i.getFamilyName() + ' ' 
+							+ i.getAgeRange().getName() + ' ' + i.getName());
 				}
 			}
 		} else {
@@ -248,33 +250,38 @@ public class HealthUnitClass implements HealthUnit{
 
 	public void createAppointment(String customerName) {
 		//REDO
-		Scanner input = new Scanner(System.in);
+		Scanner input = new Scanner(System.in); //Do not close this input.
 		Customer customer = this.getCustomer(customerName);
 		if(customer != null) {
 			Service service = this.getService(input.nextLine());
-			input.close();
 			if(service != null) {
-				while(input.hasNextLine()) {
-					String line = input.nextLine();
-					if(line.isBlank()) {
-						input.close();
-						break;
-					}
+					String line = input.nextLine(); 
 					String[] myCommand = line.split(" ");
-					Category category = this.getCategory(myCommand[1]);
-					Employee employee = this.getEmployee(myCommand[2]);
+					Category category = this.getCategory(myCommand[0]);
+					Employee employee = this.getEmployee(myCommand[1]);
 					if(category != null) {
 						if(employee != null) {
 							switch (service.getName()) {
 							case "Consulta":
-								this.appointments.add(new AppointmentClass(customer, service, category, employee));
-								System.out.println("Cuidados marcados com sucesso.");
+								if(category.getName().equalsIgnoreCase("Medicina")) {
+									this.appointments.add(new AppointmentClass(customer, service, category, employee));
+									System.out.println("Cuidados marcados com sucesso.");
+								} else {
+									System.out.println("Categoria inválida.");
+								}
+								break;
 							case "PequenaCirurgia":
 								this.appointments.add(new AppointmentClass(customer, service, category, employee));
 								System.out.println("Cuidados marcados com sucesso.");
+								break;
 							case "Enfermagem":
-								this.appointments.add(new AppointmentClass(customer, service, category, employee));
-								System.out.println("Cuidados marcados com sucesso.");
+								if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
+									this.appointments.add(new AppointmentClass(customer, service, category, employee));
+									System.out.println("Cuidados marcados com sucesso.");									
+								} else {
+									System.out.println("Categoria inválida.");
+								}
+								break;
 							}
 						} else {
 							System.out.println("Profissional de saúde inexistente.");
@@ -282,14 +289,12 @@ public class HealthUnitClass implements HealthUnit{
 					} else {
 						System.out.println("Categoria inexistente.");
 					}
-				}
 			} else {
 				System.out.println("Serviço inexistente.");
 			}
 		} else {
 			System.out.println("Utente inexistente.");
 		}
-
 	}
 
 	public void cancelAppointment(String customerName) {
@@ -298,7 +303,7 @@ public class HealthUnitClass implements HealthUnit{
 		Customer customer = getCustomer(customerName);
 		if(customer != null) {
 			for(Appointment i : this.getAppointmentList()) {
-				if(i.getCustomer().getName() == customerName){
+				if(i.getCustomer().getName().equalsIgnoreCase(customerName)){
 					this.appointments.remove(custIndex);
 					foundCust++;
 				}
@@ -319,7 +324,7 @@ public class HealthUnitClass implements HealthUnit{
 		int appointCounter = 0;
 		if (customer != null) {
 			for(Appointment i : this.getAppointmentList()) {
-				if(i.getCustomer().getName() == customer.getName()) {
+				if(i.getCustomer().getName().equalsIgnoreCase(customerName)) {
 					System.out.println(i.getInfo());
 					appointCounter++;
 				}
@@ -338,7 +343,7 @@ public class HealthUnitClass implements HealthUnit{
 		if (family != null) {
 			for(Customer i : family.getMembers()) {
 				for(Appointment j : this.getAppointmentList()) {
-					if(j.getCustomer().getName() == i.getName()) {
+					if(j.getCustomer().getName().equalsIgnoreCase(i.getName())) {
 						System.out.println(i.getName() + ' ' + j.getInfo());
 						appointCounter++;
 					}
@@ -356,7 +361,13 @@ public class HealthUnitClass implements HealthUnit{
 		Employee employee = this.getEmployee(employeeName);
 		int employeeCounter = 0;
 		if(employee != null) {
-			//TODO
+			for(Appointment i : this.getAppointmentList()) {
+				if(i.getEmployee().getName().equalsIgnoreCase(employee.getName())) {
+					System.out.println(i.getService().getName() 
+							+ " " + i.getEmployee().getName());
+					employeeCounter++;
+				}
+			}
 			if(employeeCounter == 0) {
 				System.out.println("Profissional de saúde sem marcações.");
 			}
@@ -369,7 +380,14 @@ public class HealthUnitClass implements HealthUnit{
 		Service service = this.getService(serviceName);
 		int serviceCounter = 0;
 		if(service != null) {
-			//TODO
+			for(Appointment i : this.getAppointmentList()) {
+				if(i.getService().getName().equalsIgnoreCase(service.getName())) {
+					System.out.println(i.getEmployee().getCategory() 
+							+ " " + i.getEmployee().getName() 
+							+ " " + i.getCustomer().getName());
+					serviceCounter++;
+				}
+			}
 			if (serviceCounter == 0) {
 				System.out.println("Serviço sem marcações.");
 			}
