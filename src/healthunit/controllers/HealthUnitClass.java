@@ -80,29 +80,35 @@ public class HealthUnitClass implements HealthUnit{
 		return null;
 	}
 
+	
 	public void createCustomer(String name, String ageRangeName) {
 		Customer customer = this.getCustomer(name);
 		AgeRange ageRange = this.getAgeRange(ageRangeName);
-		if (customer == null) {
-			if (ageRange != null) {
+		if (ageRange != null) {
+			if (customer == null) {
 				customers.add(new CustomerClass(name, ageRange));
-				System.out.println("Utente registado com sucesso.");
+				System.out.println("Utente registado com sucesso.");				
 			} else {
-				System.out.println("Faixa etária inexistente.");
+				if(customer.getAgeRange() != ageRange) {
+					customers.add(new CustomerClass(name, ageRange));
+					System.out.println("Utente registado com sucesso.");									
+				} else {
+					System.out.println("Utente existente.");
+				}
 			}
+			
 		} else {
-			System.out.println("Utente existente.");
+			System.out.println("Faixa etária inexistente.");
 		}
-
 	}
 
 	public void createEmployee(String categoryName, String name) {
 		Category category = this.getCategory(categoryName);
 		Employee employee = this.getEmployee(name);
 		if (category != null) {
-			if (employee == null) {
+			if (employee == null) { //Check and perhaps correct this
 				employees.add(new EmployeeClass(name, category));
-				System.out.println("Profissinal registado com sucesso.");
+				System.out.println("Profissinal adicionado com sucesso.");
 			} else {
 				System.out.println("Profissional existente.");
 			}
@@ -115,7 +121,7 @@ public class HealthUnitClass implements HealthUnit{
 		Family family = this.getFamily(familyName);
 		if(family == null) {
 			families.add(new FamilyClass(familyName));
-			System.out.println("Família registada com sucesso.");
+			System.out.println("Família adicionada com sucesso.");
 		} else {
 			System.out.println("Família existente.");
 		}
@@ -166,7 +172,7 @@ public class HealthUnitClass implements HealthUnit{
 		Family familyToAdd = getFamily(familyName);
 		Customer memberToAdd = getCustomer(customerName);
 		if (memberToAdd != null) {
-			if(memberToAdd.getFamilyName() == null) {
+			if(memberToAdd.getFamilyName().isBlank()) {
 				if(familyToAdd != null) {
 					familyToAdd.addMember(memberToAdd);
 					memberToAdd.setFamilyName(familyToAdd.getName());
@@ -192,7 +198,7 @@ public class HealthUnitClass implements HealthUnit{
 				System.out.println("Utente desassociado de família.");
 			} else {
 				System.out.println("Utente não pertence a família.");
-			} 
+			}
 		} else {
 			System.out.println("Utente inexistente.");
 		}
@@ -221,7 +227,7 @@ public class HealthUnitClass implements HealthUnit{
 	public void listCustomers() {
 		if(!this.getCustomerList().isEmpty()) {
 			for(Customer i : this.getCustomerList()){
-				if(i.getFamilyName() == null) {
+				if(i.getFamilyName() == "") {
 					System.out.println(i.getAgeRange().getName() + ' ' + i.getName());
 				} else {
 					System.out.println(i.getFamilyName() + ' ' + i.getAgeRange().getName() + ' ' + i.getName());
@@ -242,6 +248,7 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void createAppointment(String customerName) {
+		//REDO
 		Scanner input = new Scanner(System.in);
 		Customer customer = this.getCustomer(customerName);
 		if(customer != null) {
@@ -374,6 +381,7 @@ public class HealthUnitClass implements HealthUnit{
 
 	public boolean save() {
 		// TODO Auto-generated method stub
+		// Should check: https://stackoverflow.com/questions/27326226/java-how-do-you-write-arraylist-to-a-binary-file
 		return false;
 	}
 
