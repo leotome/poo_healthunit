@@ -17,6 +17,14 @@ public class AppointmentClass implements Appointment {
 		return this.customer;
 	}
 	
+	public Employee getEmployee() {
+		return this.employee;
+	}
+	
+	public Service getService() {
+		return this.service;
+	}
+	
 	public String getInfo() {
 		return this.service.getName() + ' ' + this.category.getName() + ' ' + this.employee.getName();
 	}	
