@@ -108,9 +108,14 @@ public class HealthUnitClass implements HealthUnit{
 		if (category != null) {
 			if (employee == null) { //Check and perhaps correct this
 				employees.add(new EmployeeClass(name, category));
-				System.out.println("Profissinal adicionado com sucesso.");
+				System.out.println("Profissinal registado com sucesso.");
 			} else {
-				System.out.println("Profissional existente.");
+				if(employee.getCategory() != category) {
+					employees.add(new EmployeeClass(name, category));
+					System.out.println("Profissinal registado com sucesso.");					
+				} else {
+					System.out.println("Profissional existente.");
+				}
 			}
 		} else {
 			System.out.println("Categoria inexistente.");
