@@ -261,22 +261,26 @@ public class HealthUnitClass implements HealthUnit{
 					Employee employee = this.getEmployee(myCommand[1]);
 					if(category != null) {
 						if(employee != null) {
+							Appointment a = null;
 							switch (service.getName()) {
 							case "Consulta":
 								if(category.getName().equalsIgnoreCase("Medicina")) {
-									this.appointments.add(new AppointmentClass(customer, service, category, employee));
+									a = new AppointmentClass(customer, service, category, employee);
+									this.appointments.add(a);
 									System.out.println("Cuidados marcados com sucesso.");
 								} else {
 									System.out.println("Categoria inválida.");
 								}
 								break;
 							case "PequenaCirurgia":
-								this.appointments.add(new AppointmentClass(customer, service, category, employee));
+								a = new AppointmentClass(customer, service, category, employee);
+								this.appointments.add(a);
 								System.out.println("Cuidados marcados com sucesso.");
 								break;
 							case "Enfermagem":
 								if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
-									this.appointments.add(new AppointmentClass(customer, service, category, employee));
+									a = new AppointmentClass(customer, service, category, employee);
+									this.appointments.add(a);
 									System.out.println("Cuidados marcados com sucesso.");									
 								} else {
 									System.out.println("Categoria inválida.");
