@@ -89,14 +89,8 @@ public class HealthUnitClass implements HealthUnit{
 				customers.add(new CustomerClass(name, ageRange));
 				System.out.println("Utente registado com sucesso.");				
 			} else {
-				if(customer.getAgeRange() != ageRange) {
-					customers.add(new CustomerClass(name, ageRange));
-					System.out.println("Utente registado com sucesso.");									
-				} else {
 					System.out.println("Utente existente.");
-				}
 			}
-			
 		} else {
 			System.out.println("Faixa etária inexistente.");
 		}
