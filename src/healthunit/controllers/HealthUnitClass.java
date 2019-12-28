@@ -249,52 +249,61 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void createAppointment(String customerName) {
-		Scanner input = new Scanner(System.in);
+		Scanner apInput = new Scanner(System.in); //Never close this scanner!
 		Customer customer = this.getCustomer(customerName);
 		if(customer != null) {
-			Service service = this.getService(input.nextLine());
+			while(apInput.hasNextLine()) {
+				String line = apInput.nextLine();
+				if(line.isBlank()) {
+					break;
+				}
+				Service service = this.getService(line);
 			if(service != null) {
-					String line = input.nextLine();
-					String[] myCommand = line.split(" ");
-					Category category = this.getCategory(myCommand[0]);
-					Employee employee = this.getEmployee(myCommand[1]);
-					if(category != null) {
-						if(employee != null) {
-							Appointment a = null;
-							switch (service.getName()) {
-							case "Consulta":
-								if(category.getName().equalsIgnoreCase("Medicina")) {
+						String line_2 = apInput.nextLine();
+						if(line_2.isBlank()) {
+							break;
+						}
+						String[] myCommand = line_2.split(" ");
+						Category category = this.getCategory(myCommand[0]);
+						Employee employee = this.getEmployee(myCommand[1]);
+						if(category != null) {
+							if(employee != null) {
+								Appointment a = null;
+								switch (service.getName()) {
+								case "Consulta":
+									if(category.getName().equalsIgnoreCase("Medicina")) {
+										a = new AppointmentClass(customer, service, category, employee);
+										this.appointments.add(a);
+										System.out.println("Cuidados marcados com sucesso.");
+									} else {
+										System.out.println("Categoria inválida.");
+									}
+									break;
+								case "PequenaCirurgia":
 									a = new AppointmentClass(customer, service, category, employee);
 									this.appointments.add(a);
 									System.out.println("Cuidados marcados com sucesso.");
-								} else {
-									System.out.println("Categoria inválida.");
+									break;
+								case "Enfermagem":
+									if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
+										a = new AppointmentClass(customer, service, category, employee);
+										this.appointments.add(a);
+										System.out.println("Cuidados marcados com sucesso.");
+									} else {
+										System.out.println("Categoria inválida.");
+									}
+									break;
 								}
-								break;
-							case "PequenaCirurgia":
-								a = new AppointmentClass(customer, service, category, employee);
-								this.appointments.add(a);
-								System.out.println("Cuidados marcados com sucesso.");
-								break;
-							case "Enfermagem":
-								if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
-									a = new AppointmentClass(customer, service, category, employee);
-									this.appointments.add(a);
-									System.out.println("Cuidados marcados com sucesso.");
-								} else {
-									System.out.println("Categoria inválida.");
-								}
-								break;
+							} else {
+								System.out.println("Profissional de saúde inexistente.");
 							}
 						} else {
-							System.out.println("Profissional de saúde inexistente.");
+							System.out.println("Categoria inexistente.");
 						}
-					} else {
-						System.out.println("Categoria inexistente.");
-					}
 			} else {
 				System.out.println("Serviço inexistente.");
 			}
+		  }
 		} else {
 			System.out.println("Utente inexistente.");
 		}
