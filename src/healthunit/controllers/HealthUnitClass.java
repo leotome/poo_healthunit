@@ -369,7 +369,7 @@ public class HealthUnitClass implements HealthUnit{
 			for(Appointment i : this.getAppointmentList()) {
 				if(i.getEmployee().getName().equalsIgnoreCase(employee.getName())) {
 					System.out.println(i.getService().getName()
-							+ " " + i.getEmployee().getName());
+							+ " " + i.getCustomer().getName());
 					employeeCounter++;
 				}
 			}
