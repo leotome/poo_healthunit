@@ -80,14 +80,14 @@ public class HealthUnitClass implements HealthUnit{
 		return null;
 	}
 
-	
+
 	public void createCustomer(String name, String ageRangeName) {
 		Customer customer = this.getCustomer(name);
 		AgeRange ageRange = this.getAgeRange(ageRangeName);
 		if (ageRange != null) {
 			if (customer == null) {
 				customers.add(new CustomerClass(name, ageRange));
-				System.out.println("Utente registado com sucesso.");				
+				System.out.println("Utente registado com sucesso.");
 			} else {
 					System.out.println("Utente existente.");
 			}
@@ -106,7 +106,7 @@ public class HealthUnitClass implements HealthUnit{
 			} else {
 				if(employee.getCategory() != category) {
 					employees.add(new EmployeeClass(name, category));
-					System.out.println("Profissinal registado com sucesso.");					
+					System.out.println("Profissinal registado com sucesso.");
 				} else {
 					System.out.println("Profissional existente.");
 				}
@@ -230,7 +230,7 @@ public class HealthUnitClass implements HealthUnit{
 					System.out.println(i.getAgeRange().getName() + ' '
 							+ i.getName());
 				} else {
-					System.out.println(i.getFamilyName() + ' ' 
+					System.out.println(i.getFamilyName() + ' '
 							+ i.getAgeRange().getName() + ' ' + i.getName());
 				}
 			}
@@ -249,13 +249,12 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void createAppointment(String customerName) {
-		//REDO
-		Scanner input = new Scanner(System.in); //Do not close this input.
+		Scanner input = new Scanner(System.in);
 		Customer customer = this.getCustomer(customerName);
 		if(customer != null) {
 			Service service = this.getService(input.nextLine());
 			if(service != null) {
-					String line = input.nextLine(); 
+					String line = input.nextLine();
 					String[] myCommand = line.split(" ");
 					Category category = this.getCategory(myCommand[0]);
 					Employee employee = this.getEmployee(myCommand[1]);
@@ -281,7 +280,7 @@ public class HealthUnitClass implements HealthUnit{
 								if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
 									a = new AppointmentClass(customer, service, category, employee);
 									this.appointments.add(a);
-									System.out.println("Cuidados marcados com sucesso.");									
+									System.out.println("Cuidados marcados com sucesso.");
 								} else {
 									System.out.println("Categoria inválida.");
 								}
@@ -302,21 +301,23 @@ public class HealthUnitClass implements HealthUnit{
 	}
 
 	public void cancelAppointment(String customerName) {
-		int custIndex = 0;
 		int foundCust = 0;
 		Customer customer = getCustomer(customerName);
+		List<Appointment> auxiliar = new ArrayList<Appointment>();
 		if(customer != null) {
 			for(Appointment i : this.getAppointmentList()) {
 				if(i.getCustomer().getName().equalsIgnoreCase(customerName)){
-					this.appointments.remove(custIndex);
+					auxiliar.add(i);
 					foundCust++;
 				}
-				custIndex++;
 			}
-			if(foundCust == 0) {
-				System.out.println("Utente sem cuidados de saúde marcados.");
-			} else {
+			if(foundCust != 0) {
+				for(Appointment i : auxiliar) {
+					this.appointments.remove(i);
+				}
 				System.out.println("Cuidados de saúde desmarcados com sucesso.");
+			} else {
+				System.out.println("Utente sem cuidados de saúde marcados.");
 			}
 		} else {
 			System.out.println("Utente inexistente.");
@@ -367,7 +368,7 @@ public class HealthUnitClass implements HealthUnit{
 		if(employee != null) {
 			for(Appointment i : this.getAppointmentList()) {
 				if(i.getEmployee().getName().equalsIgnoreCase(employee.getName())) {
-					System.out.println(i.getService().getName() 
+					System.out.println(i.getService().getName()
 							+ " " + i.getEmployee().getName());
 					employeeCounter++;
 				}
@@ -386,8 +387,8 @@ public class HealthUnitClass implements HealthUnit{
 		if(service != null) {
 			for(Appointment i : this.getAppointmentList()) {
 				if(i.getService().getName().equalsIgnoreCase(service.getName())) {
-					System.out.println(i.getEmployee().getCategory().getName() 
-							+ " " + i.getEmployee().getName() 
+					System.out.println(i.getEmployee().getCategory().getName()
+							+ " " + i.getEmployee().getName()
 							+ " " + i.getCustomer().getName());
 					serviceCounter++;
 				}

@@ -18,10 +18,18 @@ public class Program {
 			String[] commands = line.split(" ");
 			switch(commands[0]) {
 			case "RP":
-				healthunit.createEmployee(commands[1], commands[2]);
+				if(commands.length == 3) {
+					healthunit.createEmployee(commands[1], commands[2]);	
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				break;
 			case "RU":
-				healthunit.createCustomer(commands[1], commands[2]);
+				if(commands.length == 3) {
+					healthunit.createCustomer(commands[1], commands[2]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				break;
 			case "RF":
 				healthunit.createFamily(commands[1]);
@@ -52,6 +60,9 @@ public class Program {
 			case "MC":
 				healthunit.createAppointment(commands[1]);
 				//Marcar cuidados a utente
+				break;
+			case "CC":
+				healthunit.cancelAppointment(commands[1]);
 				break;
 			case "LCU":
 				healthunit.showAppointmentstoCustomer(commands[1]);

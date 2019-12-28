@@ -20,25 +20,29 @@ public class FamilyClass implements Family {
     this.members.add(member);
   }
 
+  public List<Customer> getMembers(){
+	  return this.members;
+  }
+
   public void delMember(Customer member){
 	int index = 0;
-    for(Customer i : this.members){
-      if(i.getName() == member.getName()){
+    for(Customer i : this.getMembers()){
+      if(i.getName().equalsIgnoreCase(member.getName())){
         this.members.remove(index);
         break;
       }
       index++;
     }
   }
-  
-  public List<Customer> getMembers(){
-	  return this.members;
-  }
 
   public void listMembers(){
-    for(Customer i : this.members){
-      System.out.println(i.getAgeRange().getName() + ' ' + i.getName());
-    }
+	if(!this.getMembers().isEmpty()) {
+	    for(Customer i : this.getMembers()){
+	      System.out.println(i.getAgeRange().getName() + ' ' + i.getName());
+	    }
+	} else {
+		System.out.println("Sem utentes registados.");
+	}
   }
 
 }
