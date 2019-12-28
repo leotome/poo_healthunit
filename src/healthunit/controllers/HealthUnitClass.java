@@ -229,7 +229,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 	public void listCustomers() {
 		if(!this.getCustomerList().isEmpty()) {
 			for(Customer i : this.getCustomerList()){
-				if(i.getFamilyName() == "") {
+				if(i.getFamilyName().isBlank()) {
 					System.out.println(i.getAgeRange().getName() + ' '
 							+ i.getName());
 				} else {
