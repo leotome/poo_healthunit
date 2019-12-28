@@ -1,6 +1,9 @@
 package healthunit.models;
 
-public class AppointmentClass implements Appointment {
+import java.io.Serializable;
+
+public class AppointmentClass implements Appointment,Serializable {
+	private static final long serialVersionUID = 1L;
 	private Customer customer;
 	private Employee employee;
 	private Category category;

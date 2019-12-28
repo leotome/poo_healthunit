@@ -1,6 +1,7 @@
 package healthunit.app;
 
 import java.util.Scanner;
+import java.io.*;
 
 import healthunit.controllers.HealthUnit;
 import healthunit.controllers.HealthUnitClass;
@@ -81,7 +82,17 @@ public class Program {
 				//Listar marcações por tipo de serviço
 				break;
 			case "G":
-				boolean stateSave = healthunit.save();
+				boolean stateSave = false;
+				try {
+					FileOutputStream fileOut = new FileOutputStream("healthunit.ser");
+					ObjectOutputStream out = new ObjectOutputStream(fileOut);
+					out.writeObject(healthunit);
+					out.close();
+					fileOut.close();
+					stateSave = true;
+				} catch(IOException i) {
+					i.printStackTrace();
+				}
 				if(stateSave == true) {
 					System.out.println("Unidade de saúde gravada.");
 				} else {
@@ -90,7 +101,19 @@ public class Program {
 				//Gravar
 				break;
 			case "L":
-				boolean stateRead = healthunit.load();
+				boolean stateRead = false;
+			     try {
+			         FileInputStream fileIn = new FileInputStream("healthunit.ser");
+			         ObjectInputStream in = new ObjectInputStream(fileIn);
+			         healthunit = (HealthUnit) in.readObject();
+			         in.close();
+			         fileIn.close();
+			         stateRead = true;
+			      } catch (IOException i) {
+			         i.printStackTrace();
+			      } catch (ClassNotFoundException c) {
+			    	  c.printStackTrace();
+			      }
 				if(stateRead == true) {
 					System.out.println("Unidade de saúde carregada.");
 				} else {

@@ -37,6 +37,4 @@ public interface HealthUnit {
 	void showAppointmentstoEmployee(String category, String employeeName);
 	void showAppointmentsperService(String serviceName);
 
-	boolean save();
-	boolean load();
 }

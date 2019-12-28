@@ -1,7 +1,10 @@
 package healthunit.models;
 
-public class CustomerClass implements Customer, Cloneable {
-    private String name;
+import java.io.Serializable;
+
+public class CustomerClass implements Customer,Serializable {
+	private static final long serialVersionUID = 1L;
+	private String name;
     private AgeRange ageRange;
     private String familyName;
 

@@ -1,9 +1,11 @@
 package healthunit.models;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class FamilyClass implements Family {
+public class FamilyClass implements Family,Serializable {
+  private static final long serialVersionUID = 1L;
   private String familyName;
   private List<Customer> members;
 

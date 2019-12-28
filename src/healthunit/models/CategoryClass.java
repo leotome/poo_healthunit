@@ -1,6 +1,9 @@
 package healthunit.models;
 
-public class CategoryClass implements Category {
+import java.io.Serializable;
+
+public class CategoryClass implements Category,Serializable {
+	private static final long serialVersionUID = 1L;
 	private String name;
 	
 	public CategoryClass(String name) {

@@ -1,6 +1,9 @@
 package healthunit.models;
 
-public class ServiceClass implements Service {
+import java.io.Serializable;
+
+public class ServiceClass implements Service,Serializable {
+	private static final long serialVersionUID = 1L;
 	private String name;
 	
 	public ServiceClass(String name) {

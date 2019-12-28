@@ -1,6 +1,9 @@
 package healthunit.models;
 
-public class AgeRangeClass implements AgeRange {
+import java.io.Serializable;
+
+public class AgeRangeClass implements AgeRange,Serializable{
+	private static final long serialVersionUID = 1L;
 	private String name;
 	
 	public AgeRangeClass(String name) {

@@ -1,5 +1,7 @@
 package healthunit.controllers;
 
+import java.io.Serializable;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,7 +22,8 @@ import healthunit.models.FamilyClass;
 
 import java.util.Scanner;
 
-public class HealthUnitClass implements HealthUnit{
+public class HealthUnitClass implements HealthUnit,Serializable{
+	private static final long serialVersionUID = 1L;
 	private List<Appointment> appointments;
 	private List<Customer> customers;
 	private List<Employee> employees;
@@ -408,17 +411,6 @@ public class HealthUnitClass implements HealthUnit{
 		} else {
 			System.out.println("Serviço inexistente.");
 		}
-	}
-
-	public boolean save() {
-		// TODO Auto-generated method stub
-		// Should check: https://stackoverflow.com/questions/27326226/java-how-do-you-write-arraylist-to-a-binary-file
-		return false;
-	}
-
-	public boolean load() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }
