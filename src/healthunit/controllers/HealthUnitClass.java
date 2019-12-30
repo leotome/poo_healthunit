@@ -101,7 +101,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 
 	public void createEmployee(String categoryName, String name) {
 		Category category = this.getCategory(categoryName);
-		Employee employee = this.getEmployee(name);
+		Employee employee = this.getEmployee(categoryName, name);
 		if (category != null) {
 			if (employee == null) { //Check and perhaps correct this
 				employees.add(new EmployeeClass(name, category));
@@ -161,10 +161,12 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 		return null;
 	}
 
-	public Employee getEmployee(String employeeName) {
+	public Employee getEmployee(String categoryName, String employeeName) {
 		for(Employee i : this.getEmployeeList()) {
 			if(i.getName().equalsIgnoreCase(employeeName)){
-				return i;
+				if(i.getCategory().getName().equalsIgnoreCase(categoryName)) {
+					return i;
+				}
 			}
 		}
 		return null;
@@ -268,7 +270,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 						}
 						String[] myCommand = line_2.split(" ");
 						Category category = this.getCategory(myCommand[0]);
-						Employee employee = this.getEmployee(myCommand[1]);
+						Employee employee = this.getEmployee(myCommand[0], myCommand[1]);
 						if(category != null) {
 							if(employee != null) {
 								Appointment a = null;
@@ -375,7 +377,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 	}
 
 	public void showAppointmentstoEmployee(String category, String employeeName) {
-		Employee employee = this.getEmployee(employeeName);
+		Employee employee = this.getEmployee(category, employeeName);
 		int employeeCounter = 0;
 		if(employee != null) {
 			for(Appointment i : this.getAppointmentList()) {
