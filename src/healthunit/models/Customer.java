@@ -5,4 +5,5 @@ public interface Customer extends Cloneable {
 	void setFamilyName(String familyName);
 	String getFamilyName();
 	AgeRange getAgeRange();
+	int getAgeRangeId();
 }

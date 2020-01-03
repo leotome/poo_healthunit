@@ -20,4 +20,7 @@ public class EmployeeClass implements Employee,Serializable {
     return this.category;
   }
 
+  public int getCategoryId() {
+	  return this.getCategory().getId();
+  }
 }

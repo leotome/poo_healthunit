@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import healthunit.models.Appointment;
 import healthunit.models.AppointmentClass;
@@ -33,12 +35,12 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 	private List<AgeRange> ageRanges;
 
 	public void initializeAll() {
-		this.categories.add(new CategoryClass("Medicina"));
-		this.categories.add(new CategoryClass("Enfermagem"));
-		this.categories.add(new CategoryClass("Auxiliar"));
-		this.ageRanges.add(new AgeRangeClass("Jovem"));
-		this.ageRanges.add(new AgeRangeClass("Adulto"));
-		this.ageRanges.add(new AgeRangeClass("Idoso"));
+		this.categories.add(new CategoryClass(1, "Medicina"));
+		this.categories.add(new CategoryClass(2, "Enfermagem"));
+		this.categories.add(new CategoryClass(3, "Auxiliar"));
+		this.ageRanges.add(new AgeRangeClass(1, "Jovem"));
+		this.ageRanges.add(new AgeRangeClass(2, "Adulto"));
+		this.ageRanges.add(new AgeRangeClass(3, "Idoso"));
 		this.services.add(new ServiceClass("Consulta"));
 		this.services.add(new ServiceClass("PequenaCirurgia"));
 		this.services.add(new ServiceClass("Enfermagem"));
@@ -210,6 +212,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 
 	public void listEmployees() {
 		if(!this.getEmployeeList().isEmpty()) {
+			Collections.sort(employees, Comparator.comparing(Employee::getCategoryId).thenComparing(Employee::getName));
 			for(Employee i : this.getEmployeeList()){
 				System.out.println(i.getCategory().getName() + ' ' + i.getName());
 			}
@@ -220,6 +223,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 
 	public void listFamilies() {
 		if(!this.getFamilyList().isEmpty()) {
+			Collections.sort(families, Comparator.comparing(Family::getName));
 			for(Family i : this.getFamilyList()){
 				System.out.println(i.getName());
 			}
@@ -230,6 +234,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 
 	public void listCustomers() {
 		if(!this.getCustomerList().isEmpty()) {
+			Collections.sort(customers, Comparator.comparing(Customer::getAgeRangeId).thenComparing(Customer::getFamilyName).thenComparing(Customer::getName));
 			for(Customer i : this.getCustomerList()){
 				if(i.getFamilyName().isBlank()) {
 					System.out.println(i.getAgeRange().getName() + ' '

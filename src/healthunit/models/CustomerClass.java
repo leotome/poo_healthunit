@@ -29,5 +29,9 @@ public class CustomerClass implements Customer,Serializable {
     public AgeRange getAgeRange(){
       return this.ageRange;
     }
+    
+    public int getAgeRangeId() {
+    	return this.getAgeRange().getId();
+    }
 
 }
