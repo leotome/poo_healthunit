@@ -314,6 +314,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 				System.out.println("Serviço inexistente.");
 			}
 		  }
+			//apInput.close();
 		} else {
 			System.out.println("Utente inexistente.");
 		}
