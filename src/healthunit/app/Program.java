@@ -33,13 +33,25 @@ public class Program {
 				}
 				break;
 			case "RF":
-				healthunit.createFamily(commands[1]);
+				if(commands.length == 2) {
+					healthunit.createFamily(commands[1]);	
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				break;
 			case "AF":
-				healthunit.associateCustomertoFamily(commands[1], commands[2]);
+				if(commands.length == 3) {
+					healthunit.associateCustomertoFamily(commands[1], commands[2]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				break;
 			case "DF":
-				healthunit.deassociateCustomertoFamily(commands[1]);
+				if(commands.length == 2) {
+					healthunit.deassociateCustomertoFamily(commands[1]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				//Desassociar utente de família
 				break;
 			case "LP":
@@ -55,30 +67,58 @@ public class Program {
 				//Listar famílias
 				break;
 			case "MF":
-				healthunit.showFamily(commands[1]);
+				if(commands.length == 2) {
+					healthunit.showFamily(commands[1]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				//Mostrar familia
 				break;
 			case "MC":
-				healthunit.createAppointment(commands[1]);
+				if(commands.length == 2) {
+					healthunit.createAppointment(commands[1]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				//Marcar cuidados a utente
 				break;
 			case "CC":
-				healthunit.cancelAppointment(commands[1]);
+				if(commands.length == 2) {
+					healthunit.cancelAppointment(commands[1]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				break;
 			case "LCU":
-				healthunit.showAppointmentstoCustomer(commands[1]);
+				if(commands.length == 2) {
+					healthunit.showAppointmentstoCustomer(commands[1]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				//Listar cuidados marcados a utente
 				break;
 			case "LCF":
-				healthunit.showAppointmentstoFamily(commands[1]);
+				if(commands.length == 2) {
+					healthunit.showAppointmentstoFamily(commands[1]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				//Listar cuidados marcados a família
 				break;
 			case "LSP":
-				healthunit.showAppointmentstoEmployee(commands[1], commands[2]);
+				if(commands.length == 3) {
+					healthunit.showAppointmentstoEmployee(commands[1], commands[2]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				//Listar serviços marcados a profissional
 				break;
 			case "LMS":
-				healthunit.showAppointmentsperService(commands[1]);
+				if(commands.length == 2) {
+					healthunit.showAppointmentsperService(commands[1]);
+				} else {
+					System.out.println("Instrução inválida.");
+				}
 				//Listar marcações por tipo de serviço
 				break;
 			case "G":
@@ -127,5 +167,4 @@ public class Program {
 		}
 		input.close();
 	}
-
 }
