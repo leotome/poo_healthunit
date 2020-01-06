@@ -271,6 +271,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 			if(service != null) {
 						String line_2 = apInput.nextLine();
 						if(line_2.isBlank()) {
+							System.out.println("Cuidados marcados com sucesso.");
 							break;
 						}
 						String[] myCommand = line_2.split(" ");
@@ -292,13 +293,11 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 								case "PequenaCirurgia":
 									a = new AppointmentClass(customer, service, category, employee);
 									this.appointments.add(a);
-									System.out.println("Cuidados marcados com sucesso.");
 									break;
 								case "Enfermagem":
 									if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
 										a = new AppointmentClass(customer, service, category, employee);
 										this.appointments.add(a);
-										System.out.println("Cuidados marcados com sucesso.");
 									} else {
 										System.out.println("Categoria inválida.");
 									}

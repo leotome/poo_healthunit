@@ -20,7 +20,7 @@ public class Program {
 			switch(commands[0]) {
 			case "RP":
 				if(commands.length == 3) {
-					healthunit.createEmployee(commands[1], commands[2]);	
+					healthunit.createEmployee(commands[1], commands[2]);
 				} else {
 					System.out.println("Instrução inválida.");
 				}
@@ -34,7 +34,7 @@ public class Program {
 				break;
 			case "RF":
 				if(commands.length == 2) {
-					healthunit.createFamily(commands[1]);	
+					healthunit.createFamily(commands[1]);
 				} else {
 					System.out.println("Instrução inválida.");
 				}
