@@ -107,11 +107,11 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 		if (category != null) {
 			if (employee == null) { //Check and perhaps correct this
 				employees.add(new EmployeeClass(name, category));
-				System.out.println("Profissinal registado com sucesso.");
+				System.out.println("Profissional registado com sucesso.");
 			} else {
 				if(employee.getCategory() != category) {
 					employees.add(new EmployeeClass(name, category));
-					System.out.println("Profissinal registado com sucesso.");
+					System.out.println("Profissional registado com sucesso.");
 				} else {
 					System.out.println("Profissional existente.");
 				}
