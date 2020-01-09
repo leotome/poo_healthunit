@@ -22,7 +22,9 @@ import healthunit.models.EmployeeClass;
 import healthunit.models.Family;
 import healthunit.models.FamilyClass;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class HealthUnitClass implements HealthUnit,Serializable{
 	private static final long serialVersionUID = 1L;
@@ -258,19 +260,16 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 		}
 	}
 
-	public void createAppointment(String customerName) {
-		Scanner apInput = new Scanner(System.in); //Never close this scanner!
+	public void createAppointment(String customerName) throws IOException {
+		BufferedReader apInput = new BufferedReader(new InputStreamReader(System.in));
 		Customer customer = this.getCustomer(customerName);
 		if(customer != null) {
-			while(apInput.hasNextLine()) {
-				String line = apInput.nextLine();
-				if(line.isBlank()) {
-					break;
-				}
+			String line = apInput.readLine();
+			while(!line.isEmpty()) {
 				Service service = this.getService(line);
 			if(service != null) {
-						String line_2 = apInput.nextLine();
-						if(line_2.isBlank()) {
+						String line_2 = apInput.readLine();
+						if(line_2.isEmpty()) {
 							System.out.println("Cuidados marcados com sucesso.");
 							break;
 						}
@@ -285,7 +284,6 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 									if(category.getName().equalsIgnoreCase("Medicina")) {
 										a = new AppointmentClass(customer, service, category, employee);
 										this.appointments.add(a);
-										System.out.println("Cuidados marcados com sucesso.");
 									} else {
 										System.out.println("Categoria inválida.");
 									}

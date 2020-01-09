@@ -1,5 +1,6 @@
 package healthunit.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import healthunit.models.Appointment;
@@ -29,7 +30,7 @@ public interface HealthUnit {
 
 	void showFamily(String familyName);
 
-	void createAppointment(String customerName);
+	void createAppointment(String customerName) throws IOException;
 	void cancelAppointment(String customerName);
 
 	void showAppointmentstoCustomer(String customerName);
