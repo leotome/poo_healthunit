@@ -419,4 +419,3 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 	}
 
 }
-//update
