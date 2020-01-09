@@ -7,7 +7,7 @@ import healthunit.controllers.HealthUnit;
 import healthunit.controllers.HealthUnitClass;
 
 public class Program {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		HealthUnit healthunit = new HealthUnitClass();
 		Scanner input = new Scanner(System.in);
 		while(input.hasNextLine()) {
