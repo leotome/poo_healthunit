@@ -22,7 +22,7 @@ import healthunit.models.EmployeeClass;
 import healthunit.models.Family;
 import healthunit.models.FamilyClass;
 
-import java.io.Scanner;
+import java.util.Scanner;
 
 public class HealthUnitClass implements HealthUnit,Serializable{
 	private static final long serialVersionUID = 1L;
