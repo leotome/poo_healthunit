@@ -57,6 +57,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 		this.initializeAll();
 	}
 
+
 	public Category getCategory(String categoryName) {
 		for(Category i : this.categories) {
 			if(i.getName().equalsIgnoreCase(categoryName)) {
@@ -105,7 +106,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 		Category category = this.getCategory(categoryName);
 		Employee employee = this.getEmployee(categoryName, name);
 		if (category != null) {
-			if (employee == null) { //Check and perhaps correct this
+			if (employee == null) {
 				employees.add(new EmployeeClass(name, category));
 				System.out.println("Profissional registado com sucesso.");
 			} else {
@@ -125,7 +126,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 		Family family = this.getFamily(familyName);
 		if(family == null) {
 			families.add(new FamilyClass(familyName));
-			System.out.println("Família adicionada com sucesso.");
+			System.out.println("Família adicionada com sucesso.");
 		} else {
 			System.out.println("Família existente.");
 		}
@@ -175,14 +176,14 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 	}
 
 	public void associateCustomertoFamily(String customerName, String familyName) {
-		Family familyToAdd = getFamily(familyName);
-		Customer memberToAdd = getCustomer(customerName);
+		Family familyToAdd = this.getFamily(familyName);
+		Customer memberToAdd = this.getCustomer(customerName);
 		if (memberToAdd != null) {
 			if(memberToAdd.getFamilyName().isBlank()) {
 				if(familyToAdd != null) {
 					familyToAdd.addMember(memberToAdd);
 					memberToAdd.setFamilyName(familyToAdd.getName());
-					System.out.println("Utente associado a família.");
+					System.out.println("Utente associado a família.");
 				} else {
 					System.out.println("Família inexistente.");
 				}
@@ -201,7 +202,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 				Family familyToChange = getFamily(memberToDel.getFamilyName());
 				familyToChange.delMember(memberToDel);
 				memberToDel.setFamilyName("");
-				System.out.println("Utente desassociado de família.");
+				System.out.println("Utente desassociado de família.");
 			} else {
 				System.out.println("Utente não pertence a família.");
 			}
@@ -258,62 +259,97 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 		}
 	}
 
+	public boolean verifyAppointment(List<Appointment> mcHelper) {
+		List<String> verifier = new ArrayList<String>();
+		for(Appointment i : mcHelper) {
+			if(i.getService().getName().equalsIgnoreCase("Consulta")) {
+				verifier.add("Consulta");
+			}
+			if(i.getService().getName().equalsIgnoreCase("PequenaCirurgia")) {
+				verifier.add("PequenaCirurgia");
+			}
+			if(i.getService().getName().equalsIgnoreCase("Enfermagem")) {
+				verifier.add("Enfermagem");
+			}
+		}
+		int x1 = verifier.indexOf("Consulta");
+		int x2 = verifier.lastIndexOf("Consulta");
+		int y1 = verifier.indexOf("PequenaCirurgia");
+		int y2 = verifier.lastIndexOf("PequenaCirurgia");
+		if(y1 != -1) {
+			if(x1 < y1 && x2 > y1 && y2 < x2) {
+				return true;
+			}
+		} else {
+			return true;
+		}
+		return false;
+	}
+
 	public void createAppointment(String customerName) {
-		Scanner apInput = new Scanner(System.in); //Never close this scanner!
+		List<Appointment> mcHelper = new ArrayList<Appointment>();
 		Customer customer = this.getCustomer(customerName);
 		if(customer != null) {
-			while(apInput.hasNextLine()) {
-				String line = apInput.nextLine();
-				if(line.isBlank()) {
+			Scanner input2 = new Scanner(System.in);
+			while(input2.hasNextLine()) {
+				String line2 = input2.nextLine();
+				if(line2.isBlank()) {
+					boolean answer = this.verifyAppointment(mcHelper);
+					if (answer) {
+						for(Appointment beubeu : mcHelper) {
+							this.getAppointmentList().add(beubeu);
+						}
+						System.out.println("Cuidados marcados com sucesso");
+					} else {
+						System.out.println("Sequência inválida");
+					}
 					break;
 				}
-				Service service = this.getService(line);
-			if(service != null) {
-						String line_2 = apInput.nextLine();
-						if(line_2.isBlank()) {
-							System.out.println("Cuidados marcados com sucesso.");
-							break;
-						}
-						String[] myCommand = line_2.split(" ");
-						Category category = this.getCategory(myCommand[0]);
-						Employee employee = this.getEmployee(myCommand[0], myCommand[1]);
+				Service service = this.getService(line2);
+				if(service != null) {
+					String line3 = input2.nextLine();
+					String[] commands2 = line3.split(" ");
+					if(commands2.length == 2) {
+						Category category = this.getCategory(commands2[0]);
 						if(category != null) {
+							Employee employee = this.getEmployee(commands2[0],commands2[1]);
 							if(employee != null) {
 								Appointment a = null;
-								switch (service.getName()) {
-								case "Consulta":
-									if(category.getName().equalsIgnoreCase("Medicina")) {
-										a = new AppointmentClass(customer, service, category, employee);
-										this.appointments.add(a);
-										System.out.println("Cuidados marcados com sucesso.");
-									} else {
-										System.out.println("Categoria inválida.");
-									}
-									break;
-								case "PequenaCirurgia":
-									a = new AppointmentClass(customer, service, category, employee);
-									this.appointments.add(a);
-									break;
-								case "Enfermagem":
-									if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
-										a = new AppointmentClass(customer, service, category, employee);
-										this.appointments.add(a);
-									} else {
-										System.out.println("Categoria inválida.");
-									}
-									break;
+								switch(service.getName()){
+									case "Consulta":
+										if(category.getName().equalsIgnoreCase("Medicina")) {
+											a = new AppointmentClass(customer, service, employee);
+											mcHelper.add(a);
+										} else {
+											System.out.println("Categoria inválida.");
+										}
+										break;
+									case "PequenaCirurgia":
+										a = new AppointmentClass(customer, service, employee);
+										mcHelper.add(a);
+										break;
+									case "Enfermagem":
+										if(category.getName().equalsIgnoreCase("Auxiliar") || category.getName().equalsIgnoreCase("Enfermagem")) {
+											a = new AppointmentClass(customer, service, employee);
+											mcHelper.add(a);
+										} else {
+											System.out.println("Categoria inválida.");
+										}
+										break;
 								}
 							} else {
-								System.out.println("Profissional de saúde inexistente.");
+								System.out.println("Profissional inexistente.");
 							}
 						} else {
 							System.out.println("Categoria inexistente.");
 						}
-			} else {
-				System.out.println("Serviço inexistente.");
+					} else {
+						System.out.println("Instrução inválida.");
+					}
+				} else {
+					System.out.println("Serviço inexistente.");
+				}
 			}
-		  }
-			//apInput.close();
 		} else {
 			System.out.println("Utente inexistente.");
 		}
@@ -334,7 +370,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 				for(Appointment i : auxiliar) {
 					this.appointments.remove(i);
 				}
-				System.out.println("Cuidados de saúde desmarcados com sucesso.");
+				System.out.println("Cuidados de saúde desmarcados com sucesso.");
 			} else {
 				System.out.println("Utente sem cuidados de saúde marcados.");
 			}
@@ -354,7 +390,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 				}
 			}
 			if (appointCounter == 0) {
-				System.out.println("Utente sem cuidados de saúde marcados.");
+				System.out.println("Utente sem cuidados de saúde marcados.");
 			}
 		} else {
 			System.out.println("Utente inexistente.");
@@ -374,7 +410,7 @@ public class HealthUnitClass implements HealthUnit,Serializable{
 				}
 			}
 			if (appointCounter == 0) {
-				System.out.println("Família sem cuidados de saúde marcados.");
+				System.out.println("Família sem cuidados de saúde marcados.");
 			}
 		} else {
 			System.out.println("Família inexistente.");

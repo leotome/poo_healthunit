@@ -6,13 +6,11 @@ public class AppointmentClass implements Appointment,Serializable {
 	private static final long serialVersionUID = 1L;
 	private Customer customer;
 	private Employee employee;
-	private Category category;
 	private Service service;
 	
-	public AppointmentClass(Customer customer, Service service, Category category, Employee employee) {
+	public AppointmentClass(Customer customer, Service service, Employee employee) {
 		this.customer = customer;
 		this.service = service;
-		this.category = category;
 		this.employee = employee;
 	}
 	
@@ -29,6 +27,6 @@ public class AppointmentClass implements Appointment,Serializable {
 	}
 	
 	public String getInfo() {
-		return this.service.getName() + ' ' + this.category.getName() + ' ' + this.employee.getName();
+		return this.service.getName() + ' ' + this.employee.getCategory().getName() + ' ' + this.employee.getName();
 	}	
 }
